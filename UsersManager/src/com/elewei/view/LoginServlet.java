@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet {
 		//返回一个界面（html技术）
 		PrintWriter out = response.getWriter(); 
 		out.println("<h1>用户登录</h1>");
+		out.println("<hr />");
 		//action写法 /web应用名/Servlet的url
 		out.println("<form action='/UsersManager/LoginClServlet' method='post'>");
 		out.println("用户id：<input type='text' name='id' /><br/>");
@@ -48,6 +49,7 @@ public class LoginServlet extends HttpServlet {
 		if(errinfo != null) {
 			out.println("<font color='red'>" + errinfo + "</font>");
 		}
+		out.println("<hr />");
 		
 	}
 

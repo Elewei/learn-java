@@ -8,6 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.elewei.domain.Users;
+import com.elewei.service.UsersService;
+
 import java.sql.*;
 
 /**
@@ -39,94 +43,22 @@ public class LoginClServlet extends HttpServlet {
 		//接收用户名与密码
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
+
+		//创建UsersService对象，完成用户登录验证
+		UsersService usersService = new UsersService();
+		Users user = new Users();
+		user.setId(Integer.parseInt(id));
+		user.setPassword(password);
 		
-		//这时看看有没有接到
-		System.out.println(id);
-		System.out.println(password);
-		
-		//驱动程序名称
-		String driver = "com.mysql.jdbc.Driver";
-		
-        // URL指向要访问的数据库名UMS        
-		String url = "jdbc:mysql://127.0.0.1:3306/UMS";
-		
-        // MySQL配置时的用户名           
-		String user = "root";           
-		
-		// MySQL配置时的密码          
-		String passworddb = "weiwei"; 
-		
-		ResultSet rs = null;
-		PreparedStatement ps = null;
-		Connection conn = null;
-		
-		//到数据库中验证
-		try {
-			//第一步：加载驱动
-			Class.forName(driver);
-			
-			//第二步：得到连接
-			conn = DriverManager.getConnection(url, user, passworddb); 
-			  
-			// statement用来执行SQL语句             
-            ps = conn.prepareStatement("SELECT * FROM users where id=? and password=?");
-			
-            //给？赋值
-            ps.setObject(1, id);
-            ps.setObject(2, password);
+        if(usersService.checkUser(user)) {
+           //说明该用户合法
+           request.getRequestDispatcher("/MainFrame").forward(request, response);;
+        } else {
+           //不合法
+           request.setAttribute("err", "用户ID或密码有误！");
+           request.getRequestDispatcher("/LoginServlet").forward(request, response);;
+        }
             
-            // 要执行的SQL语句           
-            rs = ps.executeQuery();
-            
-            if(rs.next()) {
-            	//说明该用户合法
-            	request.getRequestDispatcher("/MainFrame").forward(request, response);;
-            } else {
-            	//不合法
-            	request.setAttribute("err", "用户ID或密码有误！");
-            	request.getRequestDispatcher("/LoginServlet").forward(request, response);;
-            }
-            
-			//第三步：创建PrepareStatement
-			
-			//第四步：执行操作
-			//第五步：根据结构做处理
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			//关闭资源
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				rs=null;
-			}
-			
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				ps = null;
-			}
-			
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				conn = null;
-			}
-			
-		}
 		
 		
 //		//简单判断

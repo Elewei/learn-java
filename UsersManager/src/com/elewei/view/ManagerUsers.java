@@ -1,18 +1,15 @@
 package com.elewei.view;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import javax.servlet.ServletException;
+import java.io.*;
+import java.sql.*;
+import java.util.*;
+import com.elewei.domain.*;
+import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.elewei.service.UsersService;
 
 /**
  * Servlet implementation class ManagerUsers
@@ -37,68 +34,77 @@ public class ManagerUsers extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
+		
+		out.println("<script type='text/javascript' language='javascript'>");
+		out.println("function gotoPageNow() { var pageNow=document.getElementById('pageNow'); "
+				+ "window.open('/UsersManager/ManagerUsers?pageNow=' + pageNow.value, '_self');}"
+				+ "function confirmOper() {window.confirm('真的要删除该用户吗？');}"
+				);
+		out.println("</script>");
+		
 		
 		out.println("<h1>管理用户<h1>");
 		
-		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://127.0.0.1:3306/UMS";
-		String user = "root";
-		String passwd = "weiwei";
 		
-		ResultSet rs = null;
-		PreparedStatement ps = null;
-		Connection conn = null;
+		//定义分页需要的变量
+		int pageNow = 1; //当前页
+		int pageSize = 3;  //指定每页显示3条记录
+		int pageCount = 0;
 		
-		//从数据库中取出用户数据，并显示
+		//接收用户用户的pageNow
+		String spagenow = request.getParameter("pageNow");
+		if(spagenow != null) { 
+			pageNow = Integer.parseInt(spagenow);
+		}
+		
+		
 		try {
 			
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, user, passwd);
+			UsersService usersService = new UsersService();
+			ArrayList<Users> al = usersService.getUsersByPage(pageNow, pageSize);
+			pageCount = usersService.getPageCount(pageSize);
 			
-			ps = conn.prepareStatement("SELECT * FROM users");
-			rs = ps.executeQuery();
 			out.println("<table border=1 >");
-			out.print("<tr><th>id</th><th>用户名</th><th>email</th><th>级别</th></tr>");
-			while(rs.next()) {
-				out.println("<tr><td>"+rs.getInt(1)+"</td><td>"+rs.getString(2)+"</td><td>"+rs.getString(4)+"</td><td>"+rs.getString(5)+"</td></tr>");
+			out.print("<tr><th>id</th><th>用户名</th><th>email</th><th>级别</th><th>删除用户</th><th>修改用户</th></tr>");
+			
+			for(Users u:al) {
+				out.println("<tr>"
+				+ "<td>"+u.getId()+"</td>"
+				+ "<td>"+u.getName()+"</td>"
+				+ "<td>"+u.getEmail()+"</td>"
+				+ "<td>"+u.getGrade()+"</td>"
+				+ "<td><a onClick='return confirmOper()' href='/UsersManager/UserClServlet?type=del&id="+u.getId()+"'>删除用户</a></td>"
+				+ "<td><a href='/UsersManager/UserClServlet?type=gotoUpdateView&id="+u.getId()+"'>修改用户</a></td>"
+				+ "</tr>");
 			}
+			
 			out.println("</table>");
+			
+			
+			//显示上一页
+			if(pageNow > 1)
+				out.println("<a href='/UsersManager/ManagerUsers?pageNow="+(pageNow-1)+"'>上一页</a>");
+			
+			//显示分页
+			for(int i=1; i<=pageCount; i++) {
+				out.println("<a href='/UsersManager/ManagerUsers?pageNow="+i+"'><"+i+"></a>");
+			}
+			
+			//显示下一页
+			if(pageNow < pageCount)
+				out.println("<a href='/UsersManager/ManagerUsers?pageNow="+(pageNow+1)+"'>下一页</a>");
+			
+			//显示分页信息
+			out.println("&nbsp;&nbsp;&nbsp;当前页" +pageNow+ "/总页数" + pageCount + "<br />");
+			
+			//跳转到第几页
+			out.println("跳转到: <input type='text' id='pageNow' name='pageNow' /> <input type='button' onClick='gotoPageNow()' value='跳' />");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			//关闭资源
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				rs=null;
-			}
-			
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				ps = null;
-			}
-			
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				conn = null;
-			}
-		}
+		} 
 		
 	}
 

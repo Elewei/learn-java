@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MainFrame
+ * Servlet implementation class Ok
  */
-@WebServlet("/MainFrame")
-public class MainFrame extends HttpServlet {
+@WebServlet("/Ok")
+public class Ok extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainFrame() {
+    public Ok() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,16 +34,8 @@ public class MainFrame extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		out.println("<h1>欢迎登录</h1>");
-		out.println("<a href='LoginServlet'>重新返回登录界面</a>");
-		
-		out.println("<h3>请选择操作</h3>");
-		out.println("<a href='/UsersManager/ManagerUsers'>管理用户</a><br />");
-		out.println("<a href='/UsersManager/UserClServlet?type=gotoAddView'>添加用户</a><br />");
-		out.println("<a href=''>查找用户</a><br />");
-		out.println("<a href=''>退出系统</a><br />");
-		
-		
+		out.print("<h3>操作成功</h3>");
+		out.println("<a href='/UsersManager/ManagerUsers'>返回用户管理界面</a>");
 		
 	}
 

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.elewei.domain.Users;
+
 /**
  * Servlet implementation class MainFrame
  */
@@ -30,6 +32,16 @@ public class MainFrame extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		//取出login的session, 封装成函数，或者过滤器
+		Users u = (Users) request.getSession().getAttribute("login");
+		
+		if(u == null) {
+			//非法用户
+			request.setAttribute("err", "请输入用户名与密码登录");
+			request.getRequestDispatcher("/LoginServlet").forward(request, response);
+			return;
+		}
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();

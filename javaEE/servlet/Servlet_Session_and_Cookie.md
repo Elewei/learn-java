@@ -220,6 +220,23 @@ www.sourceforge.net[开源]
 第二步：在登录界面中增加验证码
 第三步：在验证登录servlet中使用session判断验证码是否正确
 
+应用：
+如何实现关掉IE后，再开IE，上次购买的商品还在？
+
+分析实现的思路：
+把sessionID保存到cookie中
+
+问题：如果客户端禁用cookie，session如何使用？
+
+
+
+
+session应用案例
+简易购物车
+
+
+
+
 
 
 

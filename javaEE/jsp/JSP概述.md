@@ -100,3 +100,32 @@ abc.jsp 保留page指令与内容信息，其他可以清除
 	<!--注释的内容-->		//源码可以看到
 
 
+**JSP九大内置对象**
+
+1. out //向客户端输出数据，字节流
+2. request //接收客户端的http请求 --HttpServletRequest
+	getParameter(String name);	//name表示表单中的参数名
+	getParameterValues(String name); //使用得到是String[]
+	getAttribute(String name, Object obj); //设置名字为name的obj, 值为obj
+	getAttribute(String name); //返回由name指定的属性值，如果不存在就返回null;
+	getCookie();
+3. response //封装jsp的产生回应 --HttpServletResponse
+	addCookie(Cookie cookie);
+	sendRedirect(“./welcome.jsp”);
+4. session //用于保存用户的信息，跟踪用户的行为 --HttpSession
+	getAttribute(String name, Object obj);
+	getAttribute(String name);
+5. application // 多个用户共享该对象，可以做计数器 --ServletContext
+6. pageContext //代表JSP页面上下文，也是一个域对象，可以setAttribute(), 作用范围只是本页面
+7. exception //代表运行时的一个异常
+	getMessage();
+8. page //代表jsp这个实例本身（使用比较少）
+9. config //代表jsp对应的servlet的配置，可以得到web.xml的参数  -- ServletConfig
+
+
+pageContext(域对象，存放的数据只能在当前页面使用)
+request(域对象，存放的数据在一次request请求有效)
+session(域对象，存放的数据在一次会话有效)
+application(域对象，存放的数据在整个web应用运行期间有效)
+
+

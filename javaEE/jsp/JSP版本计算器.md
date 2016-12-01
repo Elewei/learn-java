@@ -15,15 +15,15 @@ result.jsp // 接收用户提交的数据，并显示结果
 	</head>
 	<body>
 		<form action=‘/ServeletProject/result.jsp’ method=‘post’>
-			请输入第一个数：<input type=‘text’ name=‘num1’ /> <br />
-			请输入第二个数：<input type=‘text’ name=‘num2’ /> <br />
+			请输入第一个数：<input type=‘text’ id=“num1” name=‘num1’ /> <br />
+			请输入第二个数：<input type=‘text’ id=“num2” name=‘num2’ /> <br />
 			请选择运算符：  <select name=‘operator’>
 							<option value=“+”>+</option>
 							<option value=“-“>-</option>
 							<option value=“*”>*</option>
 							<option value=“/“>/</option> 
 						</select> <br />
-			<input type=‘submit’ value=‘计算’ />
+			<input type=‘submit’ onclick=“return checkNum()” value=‘计算’ />
 		</form>
 	</body>
 	</html>
@@ -73,5 +73,26 @@ result.jsp // 接收用户提交的数据，并显示结果
 	</body>
 	</html>
 	
+
+	calculator.js
+	/**
+	 *  验证用户的输入是否为空
+	 */
+	
+	function checkNum() {
+		var num1 = document.getElementById(“num1”).value;
+		var num2 = document.getElementById(“num2”).value;
+		if(num1==“” || num2==“”) {
+			window.alert(“输入不能为空！”);
+			return false;
+		}
+		
+		var reg=/^[1-9]\d*(\.[0-9]+)?$|^0$/i;
+		if(!reg.test(num1) || !reg.test(num2)) {
+			window.alert(“请输入一个数”);
+			return false;
+		}
+	}
+
 
 

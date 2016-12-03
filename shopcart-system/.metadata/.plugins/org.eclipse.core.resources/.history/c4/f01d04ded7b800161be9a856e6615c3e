@@ -1,0 +1,10 @@
+package com.elewei.domain;
+
+public class Users {
+	private String userid;
+	private String username;
+	private String password;
+	private String email;
+	private String telephone;
+	private int grade;
+}

@@ -1,0 +1,10 @@
+package com.elewei.domain;
+
+public class Books {
+	private int bookid;
+	private String bookname;
+	private String author;
+	private String publishHouse;
+	private float price;
+	private int booknum;
+}

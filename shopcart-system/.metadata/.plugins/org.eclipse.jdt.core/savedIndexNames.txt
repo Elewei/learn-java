@@ -1,0 +1,27 @@
+INDEX VERSION 1.129+/Users/David/Documents/java/learn-java/shopcart-system/.metadata/.plugins/org.eclipse.jdt.core
+4269459834.index
+800366168.index
+762320129.index
+205254002.index
+649078142.index
+3648801773.index
+794130239.index
+652817705.index
+4085343701.index
+683743382.index
+3101906498.index
+818262067.index
+2524837005.index
+1846754925.index
+17676296.index
+189843398.index
+2493590561.index
+3569424511.index
+4197692322.index
+228157449.index
+2144819734.index
+1333684029.index
+2316605650.index
+380314128.index
+3965072458.index
+3926318702.index

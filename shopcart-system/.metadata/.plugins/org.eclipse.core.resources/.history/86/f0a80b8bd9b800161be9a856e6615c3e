@@ -1,0 +1,7 @@
+package com.elewei.services;
+
+//这是专门处理和Users表相关的逻辑类
+
+public class UsersService {
+
+}

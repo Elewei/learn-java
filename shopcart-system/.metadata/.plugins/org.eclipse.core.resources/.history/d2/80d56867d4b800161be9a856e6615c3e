@@ -1,0 +1,62 @@
+package com.elewei.utils;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class DbUtils {
+    //定义连接数据库
+ private static Connection ct = null;
+ //定义操作数据库的类
+ private static PreparedStatement ps = null;
+ //输出数据的类
+ private static ResultSet rs = null;
+
+// 静态方式取得链接
+ public Connection getConn() {
+  //数据库用户名
+  String username = "scott";
+  //数据库用户密码
+  String passwd = "duanhaibin";
+  String url = "jdbc:oracle:thin:@localhost:1521:ORCL";
+  //获取驱动
+  try {
+   Class.forName("oracle.jdbc.driver.OracleDriver");
+  } catch (Exception e1) {
+   // TODO Auto-generated catch block
+   e1.printStackTrace();
+  }
+  try {
+   ct = DriverManager.getConnection(url,username,passwd);
+  } catch (Exception e) {
+   e.printStackTrace();
+  }
+  return ct;
+ }
+
+// 释放资源 public void close() {
+  if (rs != null) {
+   try {
+    rs.close();
+   } catch (SQLException e) {
+    e.printStackTrace();
+   }
+  }
+  if (ps != null) {
+   try {
+    ps.close();
+   } catch (SQLException e) {
+    e.printStackTrace();
+   }
+  }
+  if (ct != null) {
+   try {
+    ct.close();
+   } catch (SQLException e) {
+    e.printStackTrace();
+   }
+  }
+ }
+}

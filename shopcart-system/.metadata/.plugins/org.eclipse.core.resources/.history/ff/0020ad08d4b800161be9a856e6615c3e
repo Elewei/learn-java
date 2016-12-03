@@ -1,0 +1,17 @@
+package com.elewei.utils;
+import java.sql.*;
+
+public class Dbutil{
+ static Connection conn=null;
+ public static Connection getConn(){
+ try{
+  Class.forName("com.mysql.jdbc.Driver");
+  } catch(Exception e){}
+ try{
+	 String url="jdbc:mysql://localhost:3306RedWine?user=root&password=root&useunicode=true&characterEncoding='gb2312'";
+		 conn=DriverManager.getConnection(url);
+		 
+  }catch(SQLException e){}
+return conn;
+ }
+}

@@ -1,0 +1,18 @@
+package com.elewei.services;
+
+import com.elewei.domain.Users;
+
+//这是专门处理和Users表相关的逻辑类
+
+public class UsersService {
+	//验证用户是否合法的方法
+	public Users checkUser(Users user) {
+		
+		//到数据库验证
+		String sql = "SELECT * FROM users where userid=? and password=?";
+		String [] paras = {user.getUserid(), user.getPassword()};
+		
+		
+		return null;
+	}
+}

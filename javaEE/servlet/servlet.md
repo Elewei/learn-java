@@ -1,8 +1,20 @@
 #Servlet介绍
-为什么会出现servlet?
+**为什么会出现servlet?**  
+
 需求：使用现有的java技术，开发一个动态网页，比如可以让用户留言，其他人可以回复。
 
-#什么是servlet（Java 服务器小程序）
+
+**Servlet容器是如何工作的？** 
+ 
+一个servlet容器要为一个servlet请求提供服务，有**三件事情**要做：
+
+- **创建一个request对象**并填充那些有可能被引用的servlet使用的信息，如参数、头部、cookies、查询字符串、URI等。  
+- **创建一个response对象**，所引用的servlet使用它来给客户端发送响应。
+- **调用servlet的service方法**，并传入request和response对象，这里servlet会从request对象取值，给response写值。
+
+
+**什么是servlet（Java 服务器小程序）**  
+
 - servlet是用java编写的服务器程序，它的特点：
 - 他是由服务器端（Tomcat）调用和执行的
 - 他是用java编写的

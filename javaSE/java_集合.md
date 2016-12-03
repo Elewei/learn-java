@@ -209,6 +209,11 @@ for(int i=0; i<vv.size(); i++) {
 	Emp emp = (Emp) vv.get(i);
 }
 
+**ArrayList 与 Vector的区别**
+
+- ArrayList 与 Vector都是java集合类，都可以用来存放java对象
+- Vector是同步的，这个类中的一些方法保证了Vector中的对象是线程安全的。而Arraylist是异步的，因此ArrayList则是异步的，因此ArrayList中的对象并不是线程安全的。
+- 从内部实现机制来讲，ArrayList和Vector都是使用数组（Array）来控制集合中的对象，当向这两种元素增加元素的时候，如果元素的数目超出内部数组长度，它们都需要扩展内部数组长度，**Vector缺省情况下自动增长原来的一倍长度**，**ArrayList是原来的50%**，如果你要在集合中保存大量数据那么使用Vector有一些优势。
 
 ##Stack
 
@@ -216,3 +221,64 @@ Stack stack = new Stack();
 
 #Map结构
 ##HashMap
+
+//创建一个HashMap对象
+HashMap hm = new HashMap();
+Emp emp1 = new Emp("sn001","aa", 3.4f);
+Emp emp2 = new Emp("sn002","bb", 5.6f);
+Emp emp3 = new Emp("sn003","cc", 1.2f);
+
+//将emp添加到hm
+hm.put("sn001", emp1);
+hm.put("sn002", emp2);
+hm.put("sn003", emp3)
+
+//HashMap如果添加相同的key，则会替换先前的对象
+
+//查找,不需要遍历
+if(hm.containsKey("sn002")) {
+	System.out.println("有该员工");
+	Emp emp=(Emp) hm.getObject("sn002");
+	System.out.println("名字：" + emp.getName());
+} else {
+	System.out.println("没有");
+}
+
+//遍历HashMap所有的key和value
+Iterator it = hm.keySet().iterator();  //迭代器
+while(it.hasNext()) {
+	//取出key值
+	String key = it.next().toString();
+	//通过key值取出value
+	Emp emp = (Emp) hm.get(key);
+	System.out.println(emp.getName());
+	System.out.println(emp.getSal());
+}
+
+
+
+
+
+
+##HashTable
+
+HashTable ht = new HashTable();
+
+
+**HashMap 与 HashTable 区别**：  
+
+- 两个都是java集合类，都可以用来存放java对象。  
+- HashTable是基于陈旧的Dictionary类的，HashMap是1.2引进的Map接口的一个实现。  
+- HashTable是同步的。这个类中的一些方法保证了HashTable中的对象是线程安全的。而HashMap是异步的，因此HashMap中的对象并不是线程安全的。因为同步的要求会影响执行的效率，如果你不需要线程安全的集合选择HashMap.  
+- HashMap可以让你将空值作为一个表的条目的key或value，但HashTable是不能放入空值的。
+
+
+
+- 如果要求线程安全，使得vector,HashTable
+- 如果不要求线程安全，使用ArrayList,Linkedlist,HashMap
+- 如果要求键值对，则使用HashMap,HashTable
+- 如果数据量大，又要求线程安全Vector
+
+
+
+

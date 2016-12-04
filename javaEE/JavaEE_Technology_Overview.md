@@ -1,6 +1,6 @@
 #J2EE的十三种技术（规范）  
 
-##Java数据库连接（JDBC） 
+###1. Java数据库连接（JDBC） 
 JDBC API以一个统一的方式访问各种数据库。与ODBC类似，JDBC将开发者和私有数据库之间的问题隔离开来。由于它建立在Java上，因此JDBC可以提供平台无关的数据库访问。
 
 JDBC定义了4种不同的驱动，具体来说，包括有：
@@ -17,7 +17,7 @@ JDBC定义了4种不同的驱动，具体来说，包括有：
 * **类型4：纯Java驱动**  
 	类型4使用纯Java数据库驱动来提供直接的数据库访问。由于类型4驱动运行在客户端，并且直接访问数据库，因此运行在这个模式暗示要使用一个两层的体系。要在一个n层的体系中使用类型4的驱动，可以通过一个包含有数据访问代码的EJB，并且让该EJB为它的客户提供一个数据库无关的服务。
 
-##Java命名和目录接口（Java Naming and Directory Interface，JNDI） 
+###2. Java命名和目录接口（Java Naming and Directory Interface，JNDI） 
 
 JNDI是Java Naming and Directory Interface 的简写，中意为：Java命名及目录接口，它是为了对高级网络应用开发中的使用的目录基础结构的访问。实际上这个目录是一个特殊的数据库，提供了对存储数据的快速访问，不象传统的目录服务访问方式-你必须提供不同的API接口去访问不同的目录服务（如：LDAP，NIS，ADS等），而它提供了一种标准的API来访问类型不同的目录。据说，使用完整的SDK可以开发那些JNDI还不支持的目录服务提供者。
    
@@ -37,7 +37,8 @@ MyEJBHome home = ctx.lookup( "myApp.myEJB" );
 　　列出一个context中的所有对象
 　　创建和删除subcontexts
 
-##企业Java Beans（Enterprise Java Beans，EJB） 
+
+###3. 企业Java Beans（Enterprise Java Beans，EJB） 
 
 J2EE其中一个引人注目的技术是EJB。它提供了一个架构来开发和配置到客户端的分布式商业逻辑，因此可以明显减少开发扩展性、高度复杂企业应用的难度。EJB规范定义了EJB组件应该如何及何时与它们的容器交互。由容器来负责提供普通的服务，例如目录服务、事务管理、安全、资源池和容错。
 　
@@ -50,12 +51,12 @@ EJB规范定义了三类基本的bean：
 　　无状态的beans（Stateless beans）：这是一个单一使用的服务，不维护任何的状态，在服务器崩溃时也不再存在，而且生存期也相对地短。例如，一个无状态的session bean可能用作执行温度转换。
 　　有状态的bean：它提供了一个传统的与客户端交互的方法，存储客户端的状态。在线购物车就是这样一个有状态session ean的典型例子。有状态session beans在服务器崩溃时也不再存在，而且生存期也相对地短，并且每个实例只可以用在一个单一的线程中。
 
-##JavaServer Pages (JSPs) 
+###4. JavaServer Pages (JSPs) 
 或许你已经对微软的Active Server Pages (ASPs)非常熟悉；JSP也是类似的技术，不过它是平台无关的。它们都是设计来帮助web内容开发者使用相对较少的代码就可以创建动态的网页。web设计者即使不懂得编程，也可以使用JSP来创建动态的网页。JavaServer Page是HTML代码和Java代码的混合。在客户请求页面的时候，服务器就会处理Java代码，然后返回HTML页面给浏览器。
 　　
 你可以也听过JHTML，它是一个旧的标准，现在已经被JSP取代了。WebLogic Server不但支持JSP，还支持JHTML。不过，在默认设置下，WebLogic Server是不支持JSP的（对于5.1版本）。你必须编辑weblogic.properties来激活web服务器，对于JSPServlet来说，也是这样。
 
-##Java servlets 
+###5. Java servlets 
 
 servlets提供的功能大部分JSP相同，它采用的是一个有点不同的方法。JSP中大部分是HTML代码，其中只有少量的Java代码，而servlets则相反，它完全使用Java编写，并且产生HTML代码。
 
@@ -69,24 +70,25 @@ servlet是一个在服务器上运行的Java小程序，它可以扩展Web服务
     
 还有一些其它的方法来处理不同类型的HTTP请求--可参考HttpServlet API的文本来得到更多相关的信息。
 
-##Java IDL/CORBA 
+###6. Java IDL/CORBA 
 　　通过Java的IDL支持，开发者可以将Java与CORBA集成。他们可以创建能配置在一个CORBA ORB中的Java对象，也可以创建作为配置在其它ORB内的CORBA对象客户端的Java类。对于通过Java将你的新应用和以前的系统集成，后者提供了一个另外的方法。
 
-##Java事务体系（JTA）/Java事务服务（JTS）
+###7. Java事务体系（JTA）/Java事务服务（JTS）
 　　JTA定义了一个标准的API，应用可以通过它来访问事务监控器。
 　　JTS是CORBA OTS事务监控器的一个基本实现。JTS指定了一个事务管理器的实现（Transaction Manager），这个管理器在一个高级别上支持Java事务API（JTA）规范，并且在一个低级别上实现了OMG OTS规范的Java映射。一个JTS事务管理器为应用服务器、资源管理器、standalone应用和通信资源管理器提供事务服务。
 
-##JavaMail和JavaBeans激活架构（JavaBeans Activation Framework，JAF） 
+###8. JavaMail和JavaBeans激活架构（JavaBeans Activation Framework，JAF） 
 　　JavaMail是一个用来访问邮件服务器的API。JavaMail API提供了一套抽象类来模型化一个邮件系统。支持SMTP和IMAP服务器。
 　　JavaMail通过使用JavaBeans Activation Framework (JAF) 来处理MIME加密的邮件附件。MIME字节流和Java对象间可以互相转化。大多数的应用无需要直接使用JAF。
 
-##Java信使服务（Java Messaging Service，JMS）
+###9. Java信使服务（Java Messaging Service，JMS）
 　　JMS是一个用来和面向信息的中层通信的API。它不但支持点对点的域，也支持发布/订阅域，并且提供对担保信息传送、事务信息传送、持久信息和durable subscribers的支持。对于将你的应用和以前的backend系统集成，JMS提供了另外一个方法。
 
-##扩展标记语言（Extensible Markup Language，XML） 
+###10. 扩展标记语言（Extensible Markup Language，XML） 
 XML是一个用来定义其它标记语言的的语言。它可被用作商业之间的数据共享。XML的发展是与Java分开的；不过，它的目标和Java类似，都是为了与平台无关。通过将Java与XML结合，你可以得到一个完全平台无关的解决方案。多个公司都为在Java和XML间开发一个紧密的集成而工作。具体的信息，可浏览Sun站点的Java-XML部分（http://java.sun.com/xml），以及IBM的developerWorks的XML Zone部分。
 
-##Struts+Spring+Hibernate（ssh）
+
+###11. Struts+Spring+Hibernate（ssh）
 
 现有的java技术:
 

@@ -2,8 +2,10 @@
 学习java的过程
 
 ###javaSE
-[java面向对象](javaSE/java_面向对象.md)
-
+[01. java 基本数据类型](javaSE/java_数据类型.md)  
+[02. java 面向对象](javaSE/java_面向对象.md)  
+[03. java 图形界面](javaSE/java_图形界面.md)  
+[04. java 多线程](javaSE/java_多线程.md)  
 
 ####TankProject
 使用JAVA SE的基础知识（面向对象、Swing,事件处理，线程，IO）来完成坦克大战游戏

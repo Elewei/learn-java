@@ -2,25 +2,28 @@
 ###1. 流的概念和作用
 流是一组有顺序的，有起点和终点的字节集合，是对数据传输的总称或抽象。即数据在两设备间的传输称为流，流的本质是数据传输，根据数据传输特性将流抽象为各种类，方便更直观的进行数据操作。 
 
+![](http://i.imgur.com/1yNSQ9C.jpg)
+
 ####1.1 IO流的分类
-根据处理数据类型的不同分为：**字符流** && **字节流**  
-根据数据流向不同分为：**输入流** && **输出流**
+根据处理数据类型的不同分为：**字符流** && **字节流**    
+根据数据流向不同分为：**输入流** && **输出流**  
 
 #####1.2 字符流 && 字节流
 字符流的由来：因为数据编码的不同，而有了对字符进行高效操作的流对象。本质其实就是基于字节流读取时，去查了指定的码表。 字节流和字符流的区别：  
-**读写单位不同**：字节流以字节（8bit）为单位，字符流以字符为单位，根据码表映射字符，一次可能读多个字节。  
+**读写单位不同**：字节流以**字节（8bit）**为单位，字符流以**字符**为单位，根据码表映射字符，一次可能读多个字节。  
 **处理对象不同**：字节流能处理所有类型的数据（如图片、avi等），而字符流只能处理字符类型的数据。
 
 **结论**：只要是处理纯文本数据，就优先考虑使用字符流。 除此之外都使用字节流。
 
 ###2. Java IO流对象
-1.输入字节流InputStreamIO 中输入字节流的继承图可见上图，可以看出：
-InputStream 是所有的输入字节流的父类，它是一个抽象类。
-ByteArrayInputStream、StringBufferInputStream、FileInputStream 是三种基本的介质流，它们分别从Byte 数组、StringBuffer、和本地文件中读取数据。PipedInputStream 是从与其它线程共用的管道中读取数据，与Piped 相关的知识后续单独介绍。
+1.输入字节流`InputStreamIO` 中输入字节流的继承图可见上图，可以看出：
+`InputStream` 是所有的输入字节流的父类，它是一个抽象类。
+`ByteArrayInputStream`、`StringBufferInputStream`、`FileInputStream` 是三种基本的介质流，它们分别从Byte 数组、StringBuffer、和本地文件中读取数据。
+
 ObjectInputStream 和所有FilterInputStream 的子类都是装饰流（装饰器模式的主角）。
 
  
-2.输出字节流OutputStream
+2.输出字节流`OutputStream`
 IO 中输出字节流的继承图可见上图，可以看出：
 OutputStream 是所有的输出字节流的父类，它是一个抽象类。
 ByteArrayOutputStream、FileOutputStream 是两种基本的介质流，它们分别向Byte 数组、和本地文件中写入数据。PipedOutputStream 是向与其它线程共用的管道中写入数据，
@@ -39,7 +42,7 @@ ObjectOutputStream 和所有FilterOutputStream 的子类都是装饰流。
     PrintStream 也可以认为是一个辅助工具。主要可以向其他输出流，或者FileInputStream 写入数据，本身内部实现还是带缓冲的。本质上是对其它流的综合运用的一个工具而已。一样可以踢出IO 包！System.out 和System.out 就是PrintStream 的实例！
 
  
-4.字符输入流Reader
+4.字符输入流`Reader`
 
 在上面的继承关系图中可以看出：
 
@@ -50,7 +53,10 @@ ObjectOutputStream 和所有FilterOutputStream 的子类都是装饰流。
     InputStreamReader 是一个连接字节流和字符流的桥梁，它将字节流转变为字符流。FileReader 可以说是一个达到此功能、常用的工具类，在其源代码中明显使用了将FileInputStream 转变为Reader 的方法。我们可以从这个类中得到一定的技巧。Reader 中各个类的用途和使用方法基本和InputStream 中的类使用一致。后面会有Reader 与InputStream 的对应关系。
 
  
-5.字符输出流Writer
+5.字符输出流`Writer`
+
+
+
 
 在上面的关系图中可以看出：
 
@@ -87,6 +93,8 @@ ObjectOutputStream 和所有FilterOutputStream 的子类都是装饰流。
 8.File类
 
 File类是对文件系统中文件以及文件夹进行封装的对象，可以通过对象的思想来操作文件和文件夹。 File类保存文件或目录的各种元数据信息，包括文件名、文件长度、最后修改时间、是否可读、获取当前文件的路径名，判断指定文件是否存在、获得当前目录中的文件列表，创建、删除文件和目录等方法。  
+
+
 9.RandomAccessFile类
 
 该对象并不是流体系中的一员，其封装了字节流，同时还封装了一个缓冲区（字符数组），通过内部的指针来操作字符数组中的数据。 该对象特点：

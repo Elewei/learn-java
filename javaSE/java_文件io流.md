@@ -6,7 +6,9 @@
 
 ####1.1 IO流的分类
 根据处理数据类型的不同分为：**字符流** && **字节流**    
-根据数据流向不同分为：**输入流** && **输出流**  
+根据数据流向不同分为：**输入流(InputStream)** && **输出流(OutputStream)**  
+输入流： 由字节数组，String对象，文件，管理，Internet资源流入内存
+输出流：由内存流出
 
 #####1.2 字符流 && 字节流
 字符流的由来：因为数据编码的不同，而有了对字符进行高效操作的流对象。本质其实就是基于字节流读取时，去查了指定的码表。 字节流和字符流的区别：  
@@ -27,7 +29,10 @@ ObjectInputStream 和所有FilterInputStream 的子类都是装饰流（装饰�
 IO 中输出字节流的继承图可见上图，可以看出：
 OutputStream 是所有的输出字节流的父类，它是一个抽象类。
 ByteArrayOutputStream、FileOutputStream 是两种基本的介质流，它们分别向Byte 数组、和本地文件中写入数据。PipedOutputStream 是向与其它线程共用的管道中写入数据，
+
 ObjectOutputStream 和所有FilterOutputStream 的子类都是装饰流。
+
+
 
 3.字节流的输入与输出的对应
 
@@ -90,9 +95,104 @@ ObjectOutputStream 和所有FilterOutputStream 的子类都是装饰流。
 
 这两个流对象是字符体系中的成员，它们有转换作用，本身又是字符流，所以在构造的时候需要传入字节流对象进来。
  
-8.File类
+
+###8.File类
 
 File类是对文件系统中文件以及文件夹进行封装的对象，可以通过对象的思想来操作文件和文件夹。 File类保存文件或目录的各种元数据信息，包括文件名、文件长度、最后修改时间、是否可读、获取当前文件的路径名，判断指定文件是否存在、获得当前目录中的文件列表，创建、删除文件和目录等方法。  
+
+//屏幕回显字符
+public static void mb_echo(InputStream in) {
+	try {
+		while(true) {
+			int i = in.read();
+			if(i == -1) break;
+			char c = (char) i;
+			System.out.println(c);
+		} cache (IOException e) {
+			System.err.println("发生异常：" + e);
+		} 
+
+		System.out.println();
+	
+	}
+
+}
+
+public static void main(String[] args) {
+	mb_echo(System.in);
+}
+
+//System.in 是InputStream类型的标准输入变量
+//read()方法读入一个字节流，如果达到末尾返回-1
+//FileInputSteam(String name) name指定文件名。
+
+对文件内容进行操作的步骤：
+第一步：创建该文件所对应的输入/输出流或读写器的实例对象，获得相关系统资源。
+第二步：对该文件进行读（输入）/写（输出）操作。
+第三步：调用close成员方法，关闭文件，释放所占用的系统资源。
+
+
+实例：读入文件test.txt的内容，并输出。
+
+public static void main(String[] args) {
+	try {
+		FileInputStream f = new FileInputStream("test.txt");
+		int i;
+		int b = f.read();
+		for(i=0; b !=0; i++) {
+			System.out.println((char) b);
+			b = f.read();
+		}
+		System.out.println("文件text.txt的字节数为：" + i);
+		f.close;
+	} cache(IOException e) {
+		e.printStackTrace();
+	}
+
+}
+
+
+public FileOutputStream(String name) throws FileNotFoundException
+public FileOutputStream(String name, boolean append) throws FileNotFoundException
+
+
+
+获得当前目录列表：
+	
+	DirList.java
+	Displays directory listing
+	package c10;
+	import java.io.*;
+	
+	public class DirList {
+	  public static void main(String[] args) {
+	    try {
+	      File path = new File(".");
+	      String[] list;
+	      if(args.length == 0)
+	        list = path.list();
+	      else 
+	        list = path.list(new DirFilter(args[0]));
+	      for(int i = 0; i < list.length; i++)
+	        System.out.println(list[i]);
+	    } catch(Exception e) {
+	      e.printStackTrace();
+	    }
+	  }
+	}
+	
+	class DirFilter implements FilenameFilter {
+	  String afn;
+	  DirFilter(String afn) { this.afn = afn; }
+	  public boolean accept(File dir, String name) {
+	    // Strip path information:
+	    String f = new File(name).getName();
+	    return f.indexOf(afn) != -1;
+	  }
+	} ///:~
+
+
+
 
 
 9.RandomAccessFile类
@@ -103,3 +203,27 @@ File类是对文件系统中文件以及文件夹进行封装的对象，可以�
     该对象既可以对文件进行读操作，也能进行写操作，在进行对象实例化时可指定操作模式(r,rw)
 
 注意：该对象在实例化时，如果要操作的文件不存在，会自动创建；如果文件存在，写数据未指定位置，会从头开始写，即覆盖原有的内容。 可以用于多线程下载或多个线程同时写数据到文件。
+
+
+java.io.PrintStream 标准输出
+public PrintStream(OutputStream out)
+public PrintStream(OutputStream out, boolean autoFlush)
+public PrintStream(Sting fileName) throws FileNotFoundException
+
+
+
+###数据输入流与数据输出流
+
+java.io.DataInputStream
+java.io.DataOutputStream
+
+主要用来读取与存储基本数据类型的数据。
+
+public DataInputStream(InputStream in)
+in 指定输入流，通常是java.io.FileInputStream的实例对象
+
+FileInputStream f = new FileInput
+DataInputStream df = new DataInputStream(f);
+
+
+

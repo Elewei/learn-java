@@ -1,5 +1,5 @@
-一、理解IOC控制反转  
-依赖注入（di）：比IOC更好的名字，获得依赖对象的方式反转了。  
+###一、理解IOC控制反转  
+依赖注入（di）：比IOC更好的名字，获得依赖对象的方式反转了，本质是创建应用对象之间的协作关系
 
 spring开发提倡接口编程，配合di技术可以解决层与层之间解耦
 
@@ -15,7 +15,13 @@ spring开发提倡接口编程，配合di技术可以解决层与层之间解耦
 di配合接口编程，可以减少（WEB）层与层(业务层)之间的耦合度。
 
 
-二、装配Bean
+###二、装配Bean
+
+装配bean的三种装配机制：
+在xml进行显式配置
+在java中进行显式配置
+隐式的bean发现机制和自动装配
+
 bean工厂：最简单的容器，提供了基础的依赖注入支持。创建各种类型的Bean.
 ApplicationContext(应用上下文)：建立在bean工厂基础之上，提供系统架构服务。
 区别：
@@ -37,6 +43,8 @@ double session: web中和spring容器相关联
 ClassPathXmlApplicationContext: 从类路径中加载
 FileSystemXmlApplicationContext: 从文件系统加载
 XmlWebApplicationContext: 从web系统中加载
+AnnotationConfigApplicationContext: 从java配置文件中加载应用上下文
+AnnotationConfigWebApplicationContext
 
 第一种：
 
@@ -70,13 +78,35 @@ XmlWebApplicationContext: 从web系统中加载
 	//		factory.getBean(“student”);
 
 
+自动装配
+组件扫描（component scanning）:spring会自动发现应用上下文所创建的bean
+自动装配(自动装配):spring自动满足bean之间的依赖
 
-Bean的生命周期 
+
+应用上下文加载完毕后，可以调用上下文的getBean()方法从spring容器中获取bean
+
+Spring Bean的生命周期 
 
 ![](bean生命周期.png)
 
 第一步：实例化，当我们加载beans.xml（scope=singleton）文件时，就开始实例化到内存中。（构造函数被调用）
-第二步：
+第二步： 填充属性
+第三步：调用BeanNameAware的setBeanName方法
+第四步：调用BeanFactoryAware的setBeanFactory方法
+第五步：调用ApplicationContextAware的setApplicationContext()方法
+第六步：调用BeanPostProcessor的预初始化方法
+第七步：调用InitializingBean的afterPropertiesSet的方法
+第八步：调用自定义的初始化方法
+第九步：调用BeanPostProcessor的初始化后的方法
+第10步：bean可以使用了
+
+
+第11步：容器关闭
+调用DispostableBean的destory()方法
+调用自定义的销毁方法
+
+
+
 
 
 

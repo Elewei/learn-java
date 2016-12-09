@@ -16,14 +16,17 @@
 
 ###javaEE
 
-####1. Servlet
+####Servlet
 [01. Servlet 概述](javaEE/servlet/servlet.md)  
 [02. Servlet 请求与响应](javaEE/servlet/servlet_Request_and_Response.md)  
 [03. Servlet session与cookie](javaEE/servlet/Servlet_Session_and_Cookie.md)
 [04. Servlet Context技术](javaEE/servlet/ServletContext.md)
 
-####2. JSP
+####JSP
 
 
-####3. Spring
+####Spring
 [01. Spring 运行原理](javaEE/spring/spring简介.md)  
+[02. Spring Bean装配](javaEE/spring/装配Bean.md) 
+
+ 

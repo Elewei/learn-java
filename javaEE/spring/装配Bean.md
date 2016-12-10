@@ -222,6 +222,84 @@ java中主要的集合类型：list, map, set, 数组
 	}
 
 
+set注入是一种方式，还有一种	通过构造函数注入值。
+set注入的缺点无法清晰
+	
+	//beans.xml配置文件
+	<bean id="employee" class="com.elewei.constructor.Employee">
+		<constructor-arg index="0" type="java.lang.String" value="大明" />
+		<constructor-arg index="1" type="int" value="23" />
+	</bean>	
+	
+
+-------
+
+	package com.elewei.constructor;
+	
+	public class Employee {
+		private String name;
+		private int age;
+		
+		public Employee() {
+			super();
+		}
+		public Employee(String name, int age) {
+			super();
+			this.name = name;
+			this.age = age;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public int getAge() {
+			return age;
+		}
+		public void setAge(int age) {
+			this.age = age;
+		}
+		
+		
+	}
+
+
+
+自动装配bean的属性值（autowire）的五种方式：
+no
+byName: 根据内存中对象的名字匹配
+byType: 根据内存中对象的类型匹配
+constructor: 通过构造函数来进行匹配
+autodetect: 在byName 与 constructor 自动发现
+default: 在beans中default-autowire=“*type*”
+
+byName案例用法配置：
+
+	<bean id=“master” class=“com.elewei.autowire.Master” autowire=“byName”>
+		<property name=“name” value=“启卫” />
+	</bean>
+	
+	<bean id="dog" class="com.elewei.autowire.Dog">
+		<property name="name" value="大黄" />
+		<property name="age" value="3" />
+	</bean>	
+
+
+该配置会启用注解
+<context:annotation-config />
+
+
+使用spring特殊的bean
+通过配置后加工bean，涉及到Bean和Bean工厂生命周期。
+改变依赖注入，将字符串转换成其他类型。
+从属性文本装载信息，包括信息国际化。
+监听并处理其他bean及spring发布的系统消息。
+知道自己在spring中的唯一标识。
+
+
+
+
 
 
 

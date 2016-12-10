@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="com.elewei.domain">
+	<class name="Employee" table="employee">
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="identity" />
+		</id>
+		<property name="name" type="java.lang.String">
+			<column name="name" not-null="false" />
+		</property>
+		<property name="email" type="java.lang.String" >
+			<column name="email" not-null="false" />
+		</property>
+		<property name="hiredate" type="java.util.Date">
+			<column name="hiredate" not-null="false" />
+		</property>
+		<property name="salary">
+			<column name="salary" not-null="false"></column>
+		</property>
+	</class>
+</hibernate-mapping>

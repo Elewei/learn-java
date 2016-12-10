@@ -12,6 +12,12 @@ hibernate基础是反射机制
 
 持久层将 对象模型 <-> 关系模型 进行转换
 
+Hibernate 模块：
+hibernate-core: hibernate的核心模块
+hibernate-envers: 历史功能与模块
+hibernate-spatial: spatial/GIS数据类型支持
+hibernate-osgi: 
+
 
 使用手动配置方式开发一个hibernate项目，完成对数据库的CRUD操作。
 
@@ -36,6 +42,7 @@ src/com.elewei.domain/Employee.java
 
 对象关系映射文件：作用是用于指定domain对象和表的映射关系,domain
 
+启用SessionFactory
 手动配置hibernate.cfg.xml文件，该文件用于配置， 连接数据库的类型。
 
 	//hibernate.cfg.xml
@@ -110,8 +117,56 @@ src/com.elewei.domain/Employee.java
 
 domain -> 数据库 自动映射
 
+配置driver
+
+<property name=“hbm2ddl.auto”>create</property>
 
 
+
+
+在Hibernate中回滚事物
+
+		//增加用户
+		public static void addEmployee() {
+			//1. 创建Configuration,该对象读取hibernate.cfg.xml，并完成初始化
+			Configuration configuration = new Configuration().configure(“hibernate.cfg.xml”);
+			//2. SessionFactory 【这是一个会话工厂，是一个重量级的对象】
+			SessionFactory sessionFactory = configuration.buildSessionFactory();
+			//3. 创建Session，相当于一次连接
+			Session session = sessionFactory.openSession();
+			//4. 开始一个事物
+			Transaction transaction = null;
+			
+			try {
+				transaction = session.beginTransaction();
+				//添加一个雇员
+				Employee employee = new Employee();
+				employee.setName(“启卫2”);
+				employee.setEmail(“qiwei@elewei.com”);
+				employee.setHiredate(new Date());
+				employee.setSalary(1000.56f);
+				int i = 9/0;
+				//提交
+				transaction.commit();
+			} catch (Exception e) {
+				if(transaction != null) 
+					transaction.rollback();
+				throw new RuntimeException(e.getMessage());
+			} finally {
+				// TODO: handle finally clause
+				//关闭
+				session.close();
+			}
+			//保存
+			//session.save(employee);
+			
+			
+	
+		}
+	
+	}
+
+对事物进行优化，如果出现异常，可以回滚。
 
 
 

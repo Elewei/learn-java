@@ -29,7 +29,8 @@
 
 ###Hibernate
 [01. Hibernate 运行原理](javaEE/hibernate/Hibernate简介.md) 
-
+[02. Hibernate 核心类与接口](javaEE/hibernate/Hibernate核心类与接口.md)
+ 
 
 ####Spring
 [01. Spring 运行原理](javaEE/spring/spring简介.md)  

@@ -19,7 +19,9 @@ hibernate-spatial: spatial/GIS数据类型支持
 hibernate-osgi: 
 
 
-使用手动配置方式开发一个hibernate项目，完成对数据库的CRUD操作。
+###使用手动配置方式开发一个hibernate项目，完成对数据库的CRUD操作。
+
+db(table) -> 手写domain对象 -> 对象映射文件
 
 Hibernate 开发的三种方式：  
 1. domain object -> mapping -> DB  
@@ -169,6 +171,13 @@ domain -> 数据库 自动映射
 对事物进行优化，如果出现异常，可以回滚。
 
 
+
+###Hibernate在eclipse中快速配置
+
+db(table) -> 手写domain对象 -> 对象映射文件
+
+第一步：创建db表
+第二步：创建web项目
 
 
 

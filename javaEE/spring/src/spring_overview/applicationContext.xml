@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN/EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="userService" class="com.elewei.service.UserService">
+		<property name="name">
+			<value>启卫</value>
+		</property>
+		<property name="byService" ref="byService"></property>
+	</bean>
+	
+	<bean id="byService" class="com.elewei.service.ByService">
+		<property name="name" value="启卫"></property>
+	</bean>
+</beans>
+

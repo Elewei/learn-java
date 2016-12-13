@@ -11,6 +11,14 @@
 	Light lt = new Light();
 	lt.on();
 
+类之间的关系：  
+依赖（uses-a）：一个类的方法操纵另一个类的对象
+聚合(has-a): 类A的对象包含类B的对象
+继承(is-a)：类A扩展类B
+
+
+
+
 Java采用三个显式（明确）关键字以及一个隐式（暗示）关键字来设置类边界：`public`，`private`，`protected`以及暗示性的`friendly`。
 
 ![](http://www.yq1012.com/ThinkingInJava/Thinking+In+Java/1-2.gif)

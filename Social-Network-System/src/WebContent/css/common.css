@@ -1,0 +1,81 @@
+body{
+	font-size: 12px;
+	margin: 0;
+}
+
+/*定义常用字体*/
+.font1{
+	color: #3B5888;
+}
+.font2{
+	font-size: 16px;
+	font-weight: bold;
+}
+/**/
+.font3{
+	color: #808080;
+	line-height: 20px;
+}
+/*��ɫ��12px ����*/
+.font4{
+color: #808080;
+font-weight: bold;
+line-height: 20px;
+}
+.font5{
+font-weight: bold;
+}
+/*18px ����ϸ��*/
+.font6{
+font-size: 20px;
+font-weight: bold;
+font-family: "������κ";
+}
+
+/*对链接的一般处理方法*/
+a.anavi:link,a.anavi:visited,a.anavi:hover,a.anavi:active {
+	color:#C3CDDF;
+	text-decoration: none;
+}
+
+/*ͨ�õ�lini*/
+a:link,a:visited,a:active {
+	color:#3B5888;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #3B5888;
+	text-decoration: underline;
+}
+
+/*���弸�ť��ʽ*/
+.sub{
+	background-color: #3B5888;
+	color: white;
+	padding: 2px 0 0 0 ;
+}
+/*��һ�ť*/
+
+.button1{
+   
+   	background-color:   #ffffff;
+   	cursor:hand;
+	width:   161px;
+	height:   41px;
+   	background-image:   url(../images/front/regbtn.gif);
+   	background-repeat:   no-repeat;
+   	background-position:   center;
+   	text-align:   center;
+   	border:  none;
+ } 
+
+/*��ʾ���ֵװ�*/
+.spanVal {
+	background-color: #FFFFCD;
+	font-size: 12px;
+	padding: 3px;
+	width:220px;
+	height:14px;
+	border: 3px #E7C437 solid;
+}

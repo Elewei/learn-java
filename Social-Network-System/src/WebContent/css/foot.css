@@ -1,0 +1,25 @@
+.foot{
+	width: 1000px;
+	margin: 0 auto;
+	height: 80px;
+	padding-top: 10px;
+	border-top: 1px solid gray;
+}
+
+.navi2{
+	float: right;
+	margin-left: 500;
+}
+
+.navi2 li{
+	float: left;
+	list-style:none;
+	line-height: 33px;
+	margin: auto;
+}
+
+.boot_image {
+	width: 280px;
+	float: left;
+	margin-left: 250px;
+}

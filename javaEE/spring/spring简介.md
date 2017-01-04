@@ -2,7 +2,7 @@
 spring是什么？  
 struts 是web框架（jsp/action/actionform）  
 hibernate是orm框架，处于持久层  
-spring是容器框架，用于配置bean,并维护bean之间关系的框架  
+spring是容器框架，用于配置bean,并维护bean之间关系的框架，主要目标是Spring简化开发  
 
 bean是java中任何一种对象。javabean/service/action/数据源/dao  
 
@@ -11,6 +11,7 @@ IOC(控制反转 inverse of control): 所谓控制反转，把创建对象（bea
 DI(dependncy injection, 依赖注入): di和ioc是同一个概念，spring设计者认为di更准确表示spring核心技术。
 
 spring框架，它可以管理web层，业务层，dao层，持久层
+
 
 
 Spring 项目开发步骤：(最小配置)
